@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Fruit</title>
+</head>
+<body>
+
+<h1>Fruit Basket</h1>
+<ul>
+    <li th:each="fruit : ${fruitBasket}">
+        <p th:text="${fruit}"></p>
+        <p th:if='${fruit.equals("pear")}'>This is my favorite</p>
+    </li>
+
+</ul>
+
+</body>
+</html>
