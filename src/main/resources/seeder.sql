@@ -1,13 +1,13 @@
-USE dog_db;
+USE post_db;
 
-INSERT INTO dogs (age, name, reside_state)
+INSERT INTO posts ( title, body)
 VALUES
-(2, 'Chuck', 'TX'),
-(5, 'Fred', 'OH'),
-(3, 'Bud', 'TN'),
-(10, 'Bailey', 'AL'),
-(11, 'Lexie', 'TX'),
-(1, 'Snickers', 'TX'),
-(6, 'Red', 'FL'),
-(8, 'Barney', 'CA'),
-(12, 'Bowser', 'TX');
+('Skateboard', 'Here is a Free Skateboard'),
+('Baseballs for sale', 'Free baseballs'),
+('Bud-Lights', 'come one come all for some free beer!!'),
+('Bailey', 'Getting rid of my pet crocodile'),
+('Lexie', 'Getting rid of my waifu pillow'),
+('Snickers', 'Selling Snickers by the dozen'),
+('Free Punches', 'come to my house to get punched'),
+('Barney', 'Vintage Barney episodes for sale'),
+('Bowser', 'Need help defeating bowser in Super Mario Bros.');
