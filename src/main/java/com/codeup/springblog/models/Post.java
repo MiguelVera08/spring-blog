@@ -17,6 +17,12 @@ public class Post {
     @Column(length = 500,nullable = false)
     private String body;
 
+
+    //One-to-Many relationship
+    @ManyToOne
+    @JoinColumn (name="user_id")
+    private User user;
+
     public Post(){};
 
     public Post(long id, String title, String body){
@@ -24,6 +30,7 @@ public class Post {
         this.title = title;
         this.body = body;
     }
+
 
     public long getId() {
         return id;
@@ -37,20 +44,17 @@ public class Post {
         return this.title;
     }
 
-    public String getBody(){
+    public void setTitle(String title) { this.title = title; }
 
-        return this.body;
-
-    }
-
-    public void setTitle(String title) {
-
-        this.title = title;
-
-    }
+    public String getBody(){ return this.body; }
 
     public void setBody(String body) {
         this.body = body;
     }
+
+    public User getUser() { return user; }
+
+    public void setUser(User user) { this.user = user; }
+
 
 }
