@@ -8,6 +8,7 @@ import com.codeup.springblog.repositories.UserRepo;
 import com.codeup.springblog.services.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.support.SecurityContextProvider;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -45,6 +46,8 @@ class PostController {
     @GetMapping("/posts/{id}")
     public String getPost(@PathVariable long id, Model model) {
         model.addAttribute("post", postDao.getOne(id));
+        User u = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("userId", u.getId());
         return "posts/show";
     }
 
@@ -60,7 +63,8 @@ class PostController {
 
         String emailSubject = "This is the email subject.";
         String emailBody = "Email Body Text";
-        post.setUser(userDao.getOne(1L));
+        User u = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        post.setUser(u);
         postDao.save(post);
         emailService.prepareAndSend(post, emailSubject, emailBody);
         return "redirect:/posts/";
@@ -69,7 +73,9 @@ class PostController {
     //      Delete a Post
     @PostMapping("/posts/{id}/delete")
     public String delete(@PathVariable long id){
-        postDao.deleteById(id);
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (loggedInUser.getId() == postDao.getOne(id).getUser().getId())
+            postDao.deleteById(id);
         return "redirect:/posts";
     }
 
